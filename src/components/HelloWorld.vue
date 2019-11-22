@@ -91,27 +91,30 @@ h1 {
   margin: 0;
   padding: 0;
   color: white;
+  text-shadow: 10px 5px 1px rgb(34, 56, 59);
 }
 
 ul {
-  position: relative;
+  /* position: relative; */
   display: grid;
   width: 100%;
   height: 70vw;
   max-height: 600px;
-  grid-template-rows: repeat(4, 20%);
-  grid-template-columns: repeat(4, 20%);
+  grid-template-rows: repeat(4, 22%);
+  grid-template-columns: repeat(4, 22%);
   grid-gap: 1vw;
+  
   list-style-type: none;
   padding: 0;
-  margin: 8%;
+  margin: 0 auto;
 }
 
 li {
+  color: rgb(87, 53, 20);
   display: flex;
   background: #fefffb;
   border-radius: 1vw;
-  font-size: calc(12px + 3vw);
+  font-size: calc(32px + 2vw);
   justify-content: center;
   align-items: center;
 } 
@@ -124,14 +127,12 @@ li:hover {
   position: relative;
   display: block;
   background-image: url(../assets/_100731-828.jpg);
-  border: 1vw solid rgb(99, 56, 139); 
+  border: 1vw solid rgb(34, 56, 59); 
   width: 80%;
   border-radius: 5vw;
-  padding: 7vw 10vw 0;
+  padding: 5vw 9vw;
   margin: 15vh auto;
 }
-
-
 
 .header {
   display: grid;
@@ -150,10 +151,11 @@ li:hover {
 }
 
 .time, .count {
+  color: rgb(228, 223, 216);
   height: 2em;
   display: flex;
   flex-direction: column;
-  background: #fffceb;
+  background: rgb(34, 56, 59);
   border-radius: 1vw;
   font-size: calc(15px + 1vw);
   justify-content: center; 
@@ -161,7 +163,7 @@ li:hover {
 }
 
 .time span, .count span {
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .time, .count, h1 {
@@ -173,7 +175,7 @@ li:hover {
 }
 
 .bright {
-  background: rgb(255, 136, 0);
+  background: rgb(255, 179, 0);
 }
 
 .win {
