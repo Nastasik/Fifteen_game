@@ -32,10 +32,11 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.scss'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'styles': resolve('src/assets/scss/')
     }
   },
   module: {
@@ -76,20 +77,21 @@ module.exports = {
         }
       },
       {
-        test: /\.sass$/,
+        test: /\.scss$/,
         use: [
           'vue-style-loader',
           'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              indentedSyntax: true,
-              // sass-loader >= 8
-              sassOptions: {
-                indentedSyntax: true
-              }
-            }
-          }
+          'sass-loader',
+          // {
+          //   loader: 'sass-loader',
+          //   options: {
+          //     indentedSyntax: true,
+          //     // sass-loader >= 8
+          //     sassOptions: {
+          //       indentedSyntax: true
+          //     }
+          //   }
+          // }
         ]
       }
     ]
