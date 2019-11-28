@@ -12,12 +12,11 @@
       </time>
     </div>
     <div v-show="win === true" class="win">Победа</div>
-    <ul v-on:click.once = "timer" >
+    <ul @click.once = "timer" >
       <li v-for="(number, i) in numbers"
-          v-on:click = "move"
-          :data-i = "i"
-          v-bind:class="{ hidden: number === 0, bright: number === i+1 }"
-          v-bind:key="number">{{number}}
+          @click = "move(i)"
+          :class="{ hidden: number === 0, bright: number === i+1 }"
+          :key="number">{{number}}
       </li>
     </ul>
   </div>
@@ -25,13 +24,12 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Game',
   data () {
     return {
       msg: '15',
       count: 0,
       numbers: [...Array(16)].map((_, i) => i).sort(() => Math.random() - 0.5),   //Скорее иллюзия случайного перемешивания, но для игры достаточно
-      container: document.querySelector('ul'),
       seconds: '00',
       minutes: '00',
       win: false,
@@ -39,10 +37,9 @@ export default {
   },
 
   methods: {
-    move (e) {
-        const i = Number(e.target.dataset.i);
+    move (i) {
         const p = (((i % 4) !== 0) ? i - 1 : 222);
-        const n = ((((i - 3) % 4) !== 0) ? i + 1 : 111);
+        const n = ((((i - 3) % 4) !== 0) ? i + 1 : 222);
         const whereGoVar = [p, n, i - 4, i + 4].map(itemPos => {
           return { 
             value: this.numbers[itemPos], 
@@ -52,39 +49,36 @@ export default {
         const rightWay = whereGoVar.filter(item => item.value === 0);
       
         if(rightWay.length !== 0) {
-            this.numbers = this.numbers.map(item => {
+            const numbers = this.numbers.map(item => {
               if (item === 0) {
-                return Number(e.target.innerHTML);
+                return this.numbers[i];
               }
-              if (item == e.target.innerHTML) {
+              if (item == this.numbers[i]) {
                 return 0;
               }
               return item;
             })
+            this.numbers = numbers;
             this.count= this.count + 1;
-            this.win = this.numbers.forEach((item, i) => item === (i + 1) || item === 0) ? true : false;
+            this.win = this.numbers.every((item, i) => item === (i + 1) || item === 0);
         }
     },
 
     timer () {
         setInterval(() => {
-          this.seconds = ((this.seconds < 10) ? "0" : null) + (Number(this.seconds) + 1);
+          this.seconds = ((this.seconds < 9) ? "0" : null) + (Number(this.seconds) + 1);
           if (this.seconds === 60) {
             this.seconds = "00";
-            this.minutes = ((this.minutes < 10) ? "0" : null) + (Number(this.minutes) + 1);
+            this.minutes = ((this.minutes < 9) ? "0" : null) + (Number(this.minutes) + 1);
           }
         }, 1000);
     }
-
-
   }
 }
 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
-    
+<style lang="scss" scoped>   
     @import '../assets/scss/main';
-
 </style>
